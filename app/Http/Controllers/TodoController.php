@@ -15,19 +15,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::whereUserId(auth()->user()->id)->get();
+        $todos = Todo::whereUserId(auth()->user()->id)->orderBy('id', 'DESC')->get();
 
         return Inertia::render('Todo', ['todos'=>$todos]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function riotApiTest()
-    {
-        return Inertia::render('RiotApiTest');
     }
 
     /**
@@ -84,11 +74,10 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Todo $todo)
     {
         $todo->is_done = !$todo->is_done;
         $todo->save();

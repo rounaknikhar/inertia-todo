@@ -27,11 +27,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/dashboard', function(){
-        return Inertia::render('Dashboard');
-    })->name('dashboard');;
-
-    Route::get('/riot-api-test', [TodoController::class,'riotApiTest'])->name('riotApi.test');
     Route::get('/todos', [TodoController::class,'index'])->name('todos');
     Route::post('/todos', [TodoController::class,'store'])->name('todos.store');
     Route::put('/todos/{todo}/update', [TodoController::class,'update'])->name('todos.update');
